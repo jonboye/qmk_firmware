@@ -32,7 +32,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // Since this is, among other things, a "gaming" keyboard, a key combination to enable NKRO on the fly is provided for convenience.
     // Press Fn+N to toggle between 6KRO and NKRO. This setting is persisted to the EEPROM and thus persists between restarts.
 
-        //EL TECLADO TIENE QUE ESTAR EN INGLES INTERNACIONAL PARA QUE TODO FUNCIONE. 
+        //EL TECLADO TIENE QUE ESTAR EN INGLES INTERNACIONAL PARA QUE TODO FUNCIONE.
         //ADEMAS, TIENE QUE ESTAR INSTALADA LA ULTIMA VERSION DE WinCompose Y DEJARLA QUE CORRA AL ARRANCAR https://github.com/samhocevar/wincompose/releases/tag/v0.9.11
 
     //      ESC      F1       F2       F3       F4       F5       F6       F7       F8       F9       F10      F11      F12	     Prt           Rotary(Mute)
@@ -62,7 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [1] = LAYOUT(
         RGB_TOG, RGB_MOD, RGB_RMOD, RGB_SPI, RGB_SPD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, _______, _______, _______, _______, _______,         _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          KC_MPLY,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RESET,            KC_MNXT,
+        _______, _______, _______, UC(0x20AC), _______, _______, _______, _______, _______, _______, _______, _______, _______, RESET,         KC_MNXT,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, UC(0x30C4),       _______,          KC_MPRV,
         _______,          _______, _______, _______, _______, _______, UC(0x00F1), _______, _______, _______, UC(0x30C4),    _______, RGB_VAI, KC_MSTP,
         _______, _______, _______,                            _______,                            NK_TOGG, _______, _______, _______, RGB_VAD, _______
