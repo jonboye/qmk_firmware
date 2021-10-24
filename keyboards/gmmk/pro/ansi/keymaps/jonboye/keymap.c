@@ -71,10 +71,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 #ifdef ENCODER_ENABLE
 bool encoder_update_user(uint8_t index, bool clockwise) {
-    if (clockwise) {
-      tap_code(KC_VOLU);
-    } else {
-      tap_code(KC_VOLD);
+  if (index == 0) {
+    switch(biton32(layer_state)){
+        case 1:
+            if (clockwise){
+                tap_code16(C(KC_MNXT));
+            } else{
+                tap_code16(S(C(KC_MPRV)));
+            }
+            break;
+        default:
+            if (clockwise) {
+                tap_code16(KC_VOLU);
+            } else {
+                tap_code16(KC_VOLD);
+            }
+            break;
+        }
     }
     return true;
 }
