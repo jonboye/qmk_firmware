@@ -41,9 +41,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [0] = LAYOUT(
         KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_PSCR,          KC_MUTE,
-        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC,          KC_PSCR,
-        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS,          KC_PGUP,
-        KC_CAPS, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,          KC_ENT,           KC_PGDN,
+        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    ES_MINS, ES_EQL,  KC_BSPC,          KC_PSCR,
+        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    ES_LBRC, ES_RBRC, KC_BSLS,          KC_PGUP,
+        KC_CAPS, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    ES_SCLN, ES_QUOT,          KC_ENT,           KC_PGDN,
         KC_LSFT,          KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,          KC_RSFT, KC_UP,   KC_END,
         KC_LCTL, KC_LGUI, KC_LALT,                            KC_SPC,                             KC_RALT, MO(1),   KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
     ),
@@ -52,17 +52,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //      •        •        •        •        •        •        •        •       •        •        •         •       •	      Reset              Play
     //      •        •        •        •        •        •        •        •       •        •        •         •       •        •                  Next
     //      •        •        •        •        •        •        •        •       •        •        •         ´                Enter              Prev
-    //      •                 •        •        •        •        •        N       •        •        •         ¿                Sh_R     +Bright   Stop
+    //      •                 •        •        •        •        •        ñ       •        •        •         ¿                Sh_R     +Bright   Stop
     //      •        •        Nanda                               •                                  N Key     FN      •        •        -Bright   •
 
 
     [1] = LAYOUT(
         RGB_TOG, RGB_MOD, RGB_RMOD, RGB_SPI, RGB_SPD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, _______, _______, _______, _______, _______,         _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          KC_MPLY,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, ES_ACUT, RESET,            KC_MNXT,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,          KC_MPRV,
-        _______,          _______, _______, _______, _______, _______, ES_NTIL, _______, _______, _______, ES_IQUE,        _______, RGB_VAI, KC_MSTP,
-        _______, _______, KC_MHEN,                            _______,                            NK_TOGG, _______, _______, _______, RGB_VAD, _______
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RESET,            KC_MNXT,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, ES_SCLN,          _______,          KC_MPRV,
+        _______,          _______, _______, _______, _______, _______, ES_SCLN, _______, _______, _______, ES_SCLN,        _______, RGB_VAI, KC_MSTP,
+        _______, _______, _______,                            _______,                            NK_TOGG, _______, _______, _______, RGB_VAD, _______
     ),
 
 
@@ -92,3 +92,30 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     return true;
 }
 #endif // ENCODER_ENABLE
+
+void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    switch(get_highest_layer(layer_state)) {
+    // special handling per layer
+        case 0:  //layer one
+            if (host_keyboard_led_state().caps_lock)
+                rgb_matrix_set_color_all(255,0,0);
+            else
+                rgb_matrix_set_color_all(0,255,56);
+            break;
+        case 1:
+            for (uint8_t i = led_min; i < led_max; i++) {
+                 RGB_MATRIX_INDICATOR_SET_COLOR(i,0,0,0);
+            }
+            RGB_MATRIX_INDICATOR_SET_COLOR(0, 0, 0, 255) //esc
+            RGB_MATRIX_INDICATOR_SET_COLOR(6, 0, 0, 255) //f1
+            RGB_MATRIX_INDICATOR_SET_COLOR(8, 0, 0, 255) //q
+            RGB_MATRIX_INDICATOR_SET_COLOR(14, 0, 0, 255) //w
+            RGB_MATRIX_INDICATOR_SET_COLOR(20, 0, 0, 255) //e
+            RGB_MATRIX_INDICATOR_SET_COLOR(15, 0, 0, 255) //s
+            RGB_MATRIX_INDICATOR_SET_COLOR(26, 0, 0, 255) //f
+            RGB_MATRIX_INDICATOR_SET_COLOR(49, 0, 0, 255) //R_Alt
+            break;
+        default:
+            break;
+    }
+}
