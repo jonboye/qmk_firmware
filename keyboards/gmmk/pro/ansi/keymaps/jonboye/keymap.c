@@ -93,6 +93,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 }
 #endif // ENCODER_ENABLE
 
+#ifdef RGB_MATRIX_ENABLE
 void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     switch(get_highest_layer(layer_state)) {
     // special handling per layer
@@ -119,3 +120,5 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             break;
     }
 }
+
+#endif // RGB_MATRIX_ENABLE
