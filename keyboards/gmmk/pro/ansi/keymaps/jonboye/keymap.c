@@ -92,3 +92,30 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     return true;
 }
 #endif // ENCODER_ENABLE
+
+void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    switch(get_highest_layer(layer_state)) {
+    // special handling per layer
+        case 0:  //layer one
+            if (host_keyboard_led_state().caps_lock)
+                rgb_matrix_set_color_all(255,0,0);
+            else
+                rgb_matrix_set_color_all(0,255,56);
+            break;
+        case 1:
+            for (uint8_t i = led_min; i < led_max; i++) {
+                 RGB_MATRIX_INDICATOR_SET_COLOR(i,0,0,0);
+            }
+            RGB_MATRIX_INDICATOR_SET_COLOR(0, 0, 0, 255) //esc
+            RGB_MATRIX_INDICATOR_SET_COLOR(6, 0, 0, 255) //f1
+            RGB_MATRIX_INDICATOR_SET_COLOR(8, 0, 0, 255) //q
+            RGB_MATRIX_INDICATOR_SET_COLOR(14, 0, 0, 255) //w
+            RGB_MATRIX_INDICATOR_SET_COLOR(20, 0, 0, 255) //e
+            RGB_MATRIX_INDICATOR_SET_COLOR(15, 0, 0, 255) //s
+            RGB_MATRIX_INDICATOR_SET_COLOR(26, 0, 0, 255) //f
+            RGB_MATRIX_INDICATOR_SET_COLOR(49, 0, 0, 255) //R_Alt
+            break;
+        default:
+            break;
+    }
+}
