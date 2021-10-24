@@ -32,6 +32,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // Since this is, among other things, a "gaming" keyboard, a key combination to enable NKRO on the fly is provided for convenience.
     // Press Fn+N to toggle between 6KRO and NKRO. This setting is persisted to the EEPROM and thus persists between restarts.
 
+        //EL TECLADO TIENE QUE ESTAR EN INGLES INTERNACIONAL PARA QUE TODO FUNCIONE. 
+        //ADEMAS, TIENE QUE ESTAR INSTALADA LA ULTIMA VERSION DE WinCompose Y DEJARLA QUE CORRA AL ARRANCAR https://github.com/samhocevar/wincompose/releases/tag/v0.9.11
+
     //      ESC      F1       F2       F3       F4       F5       F6       F7       F8       F9       F10      F11      F12	     Prt           Rotary(Mute)
     //      ~        1        2        3        4        5        6        7        8        9        0         -       (=)	     BackSpc           Del
     //      Tab      Q        W        E        R        T        Y        U        I        O        P        [        ]        \                 PgUp
@@ -52,8 +55,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //      •        •        •        •        •        •        •        •       •        •        •         •       •	      Reset              Play
     //      •        •        •        •        •        •        •        •       •        •        •         •       •        •                  Next
     //      •        •        •        •        •        •        •        •       •        •        •         ´                Enter              Prev
-    //      •                 •        •        •        •        •        ñ       •        •        •         ¿                Sh_R     +Bright   Stop
-    //      •        •        •                                   •                                  N Key     FN      •        •        -Bright   •
+    //      •                 •        •        •        •        •        ñ       •        •        •         ツ               •        +Bright   Stop
+    //      •        •        •                                   •                                  N Tog     FN      •        •        -Bright   •
 
 
     [1] = LAYOUT(
