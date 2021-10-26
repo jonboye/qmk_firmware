@@ -1,1 +1,1 @@
-UNICODE_ENABLE = yes
+SPANISH_ENABLE = yes
