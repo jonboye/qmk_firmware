@@ -51,8 +51,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LCTL, KC_LGUI, KC_LALT,                            KC_SPC,                             KC_RALT, MO(1),   KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
     ),
 
-    //  RGB onoff   NxtMode  PreMode NxtEff     PreEff   +Hue     -Hue     +Sat    -Sat     •        •         •       •	      •                  •
-    //      •        •        •        •        •        •        •        •       •        •        •         •       •	      Reset              Play
+    //  RGB onoff   NxtMode  PreMode NxtEff     PreEff   +Hue     -Hue     +Sat    -Sat     •        •         •       •	    •                  •
+    //      •        •        •        •        •        •        •        •       •        •        •         •       •	    Reset              Play
     //      •        •        •        •        •        •        •        •       •        •        •         •       •        •                  Next
     //      •        •        •        •        •        •        •        •       •        •        •         ´                Enter              Prev
     //      •                 •        •        •        •        •        ñ       •        •        •         ツ               •        +Bright   Stop
