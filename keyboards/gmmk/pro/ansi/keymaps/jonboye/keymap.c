@@ -33,6 +33,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // Press Fn+N to toggle between 6KRO and NKRO. This setting is persisted to the EEPROM and thus persists between restarts.
 
         //EL TECLADO TIENE QUE ESTAR EN INGLES INTERNACIONAL PARA QUE TODO FUNCIONE.
+        //comentario de prueba en el branch develop
         //ADEMAS, TIENE QUE ESTAR INSTALADA LA ULTIMA VERSION DE WinCompose Y DEJARLA QUE CORRA AL ARRANCAR https://github.com/samhocevar/wincompose/releases/tag/v0.9.11
 
     //      ESC      F1       F2       F3       F4       F5       F6       F7       F8       F9       F10      F11      F12	     Prt           Rotary(Mute)
