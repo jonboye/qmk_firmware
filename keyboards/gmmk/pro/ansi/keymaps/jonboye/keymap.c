@@ -16,6 +16,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 #include "keymap_spanish.h"
+#include "jonboye.h"
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -127,8 +128,6 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 
 // Spanish spaghetti code down here
 
-#include "jonboye.h"
-
 #ifdef SPANISH_ENABLE
 // These indicate if left and right shift are physically pressed
 bool lshift = false;
@@ -194,6 +193,8 @@ __attribute__((weak))
 void timer_timeout_keymap(void){
 }
 
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
   #ifdef SPANISH_ENABLE
   case CU_LSFT:
     if(record->event.pressed) {
@@ -284,8 +285,9 @@ case CU_RBRC:
   SHIFT_ALGR(ES_9, ES_0)
 case CU_BSLS:
   SHIFT_ALGR(ES_MORD, ES_1)
-  case CU_GRV:
-    SHIFT_NO(ES_QUOT, ES_MORD)
+case CU_GRV:
+  SHIFT_NO(ES_QUOT, ES_MORD)
+  #endif
 
 default:
   if(record->event.pressed) {

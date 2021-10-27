@@ -29,7 +29,7 @@ enum userspace_custom_keycodes {
   CU_N,                     // ñ | Ñ
   CU_GRV,                   //'' |
   #endif
-
+};
 
 #ifdef SPANISH_ENABLE
   extern bool lshift;
