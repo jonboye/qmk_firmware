@@ -21,6 +21,7 @@
     #define RGB_DISABLE_WHEN_USB_SUSPENDED
 #endif
 
+#include "quantum.h"
 #include "keymap_spanish.h"
 
 enum userspace_custom_keycodes {
@@ -49,7 +50,7 @@ enum userspace_custom_keycodes {
   CU_N,                     // ñ | Ñ
   CU_GRV,                   //'' |
   #endif
-  }
+
 
 #ifdef SPANISH_ENABLE
   extern bool lshift;
