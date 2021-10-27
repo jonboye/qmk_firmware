@@ -127,61 +127,62 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 
 // Spanish spaghetti code down here
 
+#include "jonboye.h"
 
 #ifdef SPANISH_ENABLE
-  // These indicate if left and right shift are physically pressed
-  bool lshift = false;
-  bool rshift = false;
+// These indicate if left and right shift are physically pressed
+bool lshift = false;
+bool rshift = false;
 
-  // Number of items that are saved in prev_kcs
-  uint8_t prev_indx = 0;
-  // Used to save the last 6 actual keycodes activated by frankenkeycodes
-  uint16_t prev_kcs[6] = {0, 0, 0, 0, 0, 0};
+// Number of items that are saved in prev_kcs
+uint8_t prev_indx = 0;
+// Used to save the last 6 actual keycodes activated by frankenkeycodes
+uint16_t prev_kcs[6] = {0, 0, 0, 0, 0, 0};
 
-  // If true the deadkey characters grave and circonflexe are not automatically escaped
-  bool esct = false;
+// If true the deadkey characters grave and circonflexe are not automatically escaped
+bool esct = false;
 
-  /*
-  Used to add a keycode to a prev_kcs to remember it.
-  When full the last code gets discarded and replaced by
-  the new one.
-  */
-  void add_to_prev(uint16_t kc){
-    for (int i=0; i<prev_indx; i++){
-      if (kc == prev_kcs[i])
-        return;
-    }
-    if (prev_indx == 6){
-      for (int i=5; i>0; i--){
-        prev_kcs[i] = prev_kcs[i-1];
-      }
-      prev_kcs[0] = kc;
-    } else {
-      prev_kcs[prev_indx] = kc;
-      prev_indx++;
-    }
-  }
-
-  /*
-  Unregisters all codes saved in prev_kcs and resets prev_indx.
-  gets called on multiple occasions mainly when shift is released
-  and when frankenkeycodes are pressed. Prevents output of
-  wrong characters when really specific key combinations
-  that would never occur during normal usage are pressed.
-  */
-  void unreg_prev(void){
-    if (prev_indx == 0)
+/*
+Used to add a keycode to a prev_kcs to remember it.
+When full the last code gets discarded and replaced by
+the new one.
+*/
+void add_to_prev(uint16_t kc){
+  for (int i=0; i<prev_indx; i++){
+    if (kc == prev_kcs[i])
       return;
-    for (int i=0; i<prev_indx; i++){
-      unregister_code(prev_kcs[i]);
-    }
-    prev_indx = 0;
   }
-  #endif
+  if (prev_indx == 6){
+    for (int i=5; i>0; i--){
+      prev_kcs[i] = prev_kcs[i-1];
+    }
+    prev_kcs[0] = kc;
+  } else {
+    prev_kcs[prev_indx] = kc;
+    prev_indx++;
+  }
+}
 
-  // Interrupts all timers
+/*
+Unregisters all codes saved in prev_kcs and resets prev_indx.
+gets called on multiple occasions mainly when shift is released
+and when frankenkeycodes are pressed. Prevents output of
+wrong characters when really specific key combinations
+that would never occur during normal usage are pressed.
+*/
+void unreg_prev(void){
+  if (prev_indx == 0)
+    return;
+  for (int i=0; i<prev_indx; i++){
+    unregister_code(prev_kcs[i]);
+  }
+  prev_indx = 0;
+}
+#endif
+
+// Interrupts all timers
 void timer_timeout(void){
-  #ifdef GERMAN_ENABLE
+  #ifdef SPANISH_ENABLE
   lshiftp = false;
   rshiftp = false;
   #endif
@@ -193,53 +194,112 @@ __attribute__((weak))
 void timer_timeout_keymap(void){
 }
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
+  #ifdef SPANISH_ENABLE
+  case CU_LSFT:
+    if(record->event.pressed) {
+      lshiftp = true;
+      lshift_timer = timer_read();
+      unregister_code(KC_LSFT);
+      register_code(KC_LSFT);
+      lshift = true;
+    } else {
+      if (timer_elapsed(lshift_timer) {
+        register_code(KC_LSFT);
+        register_code(KC_8);
+        unregister_code(KC_8);
+        unregister_code(KC_LSFT);
+      }
+      unreg_prev();
+      if (!rshift)
+        unregister_code(KC_LSFT);
+      lshift = false;
+    }
+    return false;
+  case CU_RSFT:
+    if(record->event.pressed) {
+      rshiftp = true;
+      rshift_timer = timer_read();
+      unregister_code(KC_LSFT);
+      register_code(KC_LSFT);
+      rshift = true;
+    } else {
+      if (timer_elapsed(rshift_timer) {
+        register_code(KC_LSFT);
+        register_code(KC_9);
+        unregister_code(KC_9);
+        unregister_code(KC_LSFT);
+      }
+      unreg_prev();
+      if (!lshift)
+        unregister_code(KC_LSFT);
+      rshift = false;
+    }
+    return false;
+
+case CU_6:
+  if(record->event.pressed){
+    timer_timeout();
+    unregister_code(KC_LSFT);
+    if (lshift || rshift){
+      unregister_code(ES_CIRC);
+      register_code(ES_CIRC);
+      unregister_code(ES_CIRC);
+      if (!esct) {
+        register_code(KC_SPC);
+        unregister_code(KC_SPC);
+      }
+      register_code(KC_LSFT);
+    } else {
+      register_code(ES_6);
+    }
+  } else {
+    unregister_code(ES_6);
+  }
+  return false;
+case CU_COMM:
+  SHIFT_NO(ES_COMM, ES_LABK)
+case CU_DOT:
+  SHIFT_NORM(DE_DOT, ES_LABK)
+case CU_SLSH:
+  SHIFT_ALL(ES_7, ES_SS)
+case CU_SCLN:
+  SHIFT_ALL(ES_COMM, ES_DOT)
+case CU_3:
+  SHIFT_NO(ES_3, ES_HASH)
+case CU_7:
+  SHIFT_NORM(ES_7, ES_6)
+case CU_8:
+  SHIFT_NORM(ES_8, ES_PLUS)
+case CU_9:
+  SHIFT_NORM(ES_9, ES_8)
+case CU_0:
+  SHIFT_NORM(ES_0, ES_9)
+case CU_EQL:
+  SHIFT_SWITCH(ES_0, ES_PLUS)
+case CU_LBRC:
+  SHIFT_ALGR(ES_8, ES_7)
+case CU_RBRC:
+  SHIFT_ALGR(ES_9, ES_0)
+case CU_BSLS:
+  SHIFT_ALGR(ES_SS, ES_LABK)
+
+default:
+  if(record->event.pressed) {
+    timer_timeout();
+
     #ifdef SPANISH_ENABLE
-      case CU_LSFT:
-        if(record->event.pressed) {
-          lshiftp = true;
-          lshift_timer = timer_read();
-          unregister_code(KC_LSFT);
-          register_code(KC_LSFT);
-          lshift = true;
-        } else {
-          if (timer_elapsed(lshift_timer) {
-            register_code(KC_LSFT);
-            register_code(KC_8);
-            unregister_code(KC_8);
-            unregister_code(KC_LSFT);
-        }
-          unreg_prev();
-          if (!rshift)
-            unregister_code(KC_LSFT);
-          lshift = false;
-        }
-        return false;
+    if (lshift || rshift)
+      register_code(KC_LSFT);
+    else
+      unregister_code(KC_LSFT);
+    #endif
 
-      case CU_RSFT:
-        if(record->event.pressed) {
-          rshiftp = true;
-          rshift_timer = timer_read();
-          unregister_code(KC_LSFT);
-          register_code(KC_LSFT);
-          rshift = true;
-        } else {
-          if (timer_elapsed(rshift_timer) {
-            register_code(KC_LSFT);
-            register_code(KC_9);
-            unregister_code(KC_9);
-            unregister_code(KC_LSFT);
-          }
-          unreg_prev();
-          if (!lshift)
-            unregister_code(KC_LSFT);
-          rshift = false;
-        }
-        return false;
+  }
+  return process_record_keymap(keycode, record);
+}
+}
 
-        case CU_COMM:
-            SHIFT_NO(ES_COMM, ES_LABK)
-
-        return true;
-#endif
+__attribute__((weak))
+bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
+return true;
+}
