@@ -264,8 +264,10 @@ case CU_SLSH:
   SHIFT_ALL(ES_7, ES_SS)
 case CU_SCLN:
   SHIFT_ALL(ES_COMM, ES_DOT)
-case CU_3:
-  SHIFT_NO(ES_3, ES_HASH)
+case CU_2:
+  SHIFT_ALGR(ES_2, ES_2)
+  case CU_3:
+    SHIFT_NO(ES_3, ES_HASH)
 case CU_7:
   SHIFT_NORM(ES_7, ES_6)
 case CU_8:
@@ -281,7 +283,9 @@ case CU_LBRC:
 case CU_RBRC:
   SHIFT_ALGR(ES_9, ES_0)
 case CU_BSLS:
-  SHIFT_ALGR(ES_SS, ES_LABK)
+  SHIFT_ALGR(ES_MORD, ES_1)
+  case CU_GRV:
+    SHIFT_NO(ES_QUOT, ES_MORD)
 
 default:
   if(record->event.pressed) {

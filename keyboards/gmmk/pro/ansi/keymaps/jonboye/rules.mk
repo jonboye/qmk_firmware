@@ -1,5 +1,3 @@
-SPANISH_ENABLE = yes
-
 SRC += keymap.c
 
 ifeq ($(strip $(SPANISH_ENABLE)), yes)
