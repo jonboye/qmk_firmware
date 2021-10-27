@@ -47,6 +47,7 @@ enum userspace_custom_keycodes {
   CU_DOT,                   // . | >
   CU_COMM,                  // , | <
   CU_N,                     // ñ | Ñ
+  CU_GRV,                   //'' |
   #endif
   };
 
