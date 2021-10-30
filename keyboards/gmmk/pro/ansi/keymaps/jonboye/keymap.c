@@ -16,7 +16,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 #include "keymap_spanish.h"
-#include "jonboye.h"
+#include "functions.c"
 
 // clang-format of
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -43,10 +43,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [0] = LAYOUT(
         KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_PSCR,          KC_MUTE,
-        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    CU_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC,          KC_PSCR,
+        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC,          KC_PSCR,
         KC_TAB,  ES_Q,    ES_W,    ES_E,    ES_R,    ES_T,    ES_Y,    ES_U,    ES_I,    ES_O,    ES_P,    KC_LBRC, KC_RBRC, KC_BSLS,          KC_PGUP,
         KC_CAPS, ES_A,    ES_S,    ES_D,    ES_F,    ES_G,    ES_H,    ES_J,    ES_K,    ES_L,    KC_SCLN, KC_QUOT,          KC_ENT,           KC_PGDN,
-        KC_LSFT,          ES_Z,    ES_X,    ES_C,    ES_V,    ES_B,    ES_N,    ES_M,    KC_COMM, CU_DOT,  KC_SLSH,          KC_LSFT, KC_UP,   KC_END,
+        KC_LSFT,          ES_Z,    ES_X,    ES_C,    ES_V,    ES_B,    ES_N,    ES_M,    KC_COMM, KC_DOT,  KC_SLSH,          KC_RSFT, KC_UP,   KC_END,
         KC_LCTL, KC_LGUI, KC_LALT,                            KC_SPC,                             KC_RALT, MO(1),   KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
     ),
 
@@ -60,10 +60,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [1] = LAYOUT(
         RGB_TOG, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,         _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,         KC_MPLY,
+        _______, ES_IEXL, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,         KC_MPLY,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RESET,           KC_MNXT,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,         KC_MPRV,
-        _______,          _______, _______, _______, _______, _______, KC_N, _______, _______, _______, _______, _______, _______, KC_MSTP,
+        _______,          _______, _______, _______, _______, _______, ES_NTIL, _______, _______, _______, S(ES_IEXL), _______, _______, KC_MSTP,
         _______, _______, _______,                            _______,                            NK_TOGG, _______, _______, _______, _______, _______
     ),
 
@@ -127,6 +127,37 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 
 // Spanish spaghetti code down here
 
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
 
+    case KC_GRV:
+      SHIFT_NO(ES_QUOT, ES_MORD)                // ' | º
 
+    case KC_6:
+      SHIFT_NORM(ES_6, ES_GRV)                  // 6 | ^
+
+    case KC_7:
+      SHIFT_NORM(ES_7, ES_6)                    // 7 | &
+
+    case KC_8:
+      SHIFT_NORM(ES_8, ES_PLUS)                 // 8 | *
+
+    case KC_9:
+      SHIFT_NORM(ES_9, ES_8)                    // 9 | (
+
+    case KC_0:
+      SHIFT_NORM(ES_0, ES_9)                    // 0 | )
+
+    case KC_DOT:
+      SHIFT_NORM(ES_DOT, ES_LABK)               // . | >
+
+    case KC_COMM:
+      SHIFT_NO(ES_COMM, ES_LABK)                // . | >
+
+    case KC_EQL:
+      SHIFT_SWITCH(ES_0, ES_PLUS)                // . | >
+
+  }
+  return true;
+}
 // Spanish spaghetti code up here
