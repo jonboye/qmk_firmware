@@ -16,6 +16,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 #include "keymap_spanish.h"
+#include "key-overrides.c"
 
 // clang-format of
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -33,28 +34,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // Press Fn+N to toggle between 6KRO and NKRO. This setting is persisted to the EEPROM and thus persists between restarts.
 
 
-    //      ESC      F1       F2       F3       F4       F5       F6       F7       F8       F9       F10      F11      F12	     Prt           Rotary(Mute)
-    //      ~        1        2        3        4        5        6        7        8        9        0         -       (=)	     BackSpc           Del
-    //      Tab      Q        W        E        R        T        Y        U        I        O        P        [        ]        \                 PgUp
-    //      Caps     A        S        D        F        G        H        J        K        L        ;        "                 Enter             PgDn
-    //      Sh_L              Z        X        C        V        B        N        M        ,        .        ?                 Sh_R     Up       End
-    //      Ct_L     Win_L    Alt_L                               SPACE                               Alt_R    FN       Ct_R     Left     Down     Right
+//      ESC        F1          F2       F3        F4         F5       F6        F7         F8         F9          F10         F11      F12	     Prt                Rotary(Mute)
+//      ~           1           2        3         4          5        6         7          8          9           0           -       (=)	     BackSpc                     Del
+//      Tab         Q           W        E         R          T        Y         U          I          O           P           [        ]        \                          PgUp
+//      Caps        A           S        D         F          G        H         J          K          L           ;           "                 Enter                      PgDn
+//      Sh_L                    Z        X         C          V        B         N          M          ,           .           ?      Sh_R       Up                          End
+//      Ct_L     Win_L    Alt_L                                 SPACE                                Alt_R        FN         Ct_R     Left       Down     Right
 
     [0] = LAYOUT(
-        KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_PSCR,          KC_MUTE,
-        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC,          KC_PSCR,
-        KC_TAB,  ES_Q,    ES_W,    ES_E,    ES_R,    ES_T,    ES_Y,    ES_U,    ES_I,    ES_O,    ES_P,    KC_LBRC, KC_RBRC, KC_BSLS,          KC_PGUP,
-        KC_CAPS, ES_A,    ES_S,    ES_D,    ES_F,    ES_G,    ES_H,    ES_J,    ES_K,    ES_L,    KC_SCLN, KC_QUOT,          KC_ENT,           KC_PGDN,
-        KC_LSFT,          ES_Z,    ES_X,    ES_C,    ES_V,    ES_B,    ES_N,    ES_M,    KC_COMM, KC_DOT,  KC_SLSH,          KC_RSFT, KC_UP,   KC_END,
-        KC_LCTL, KC_LGUI, KC_LALT,                            KC_SPC,                             KC_RALT, MO(1),   KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
+        KC_ESC,   KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,      KC_F9,     KC_F10,       KC_F11,        KC_F12,       KC_PSCR,       KC_MUTE,
+        ES_QUOT,   KC_1,     ES_2,     ES_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,       KC_9,       KC_0,      ES_MINS,       S(ES_0),       KC_BSPC,       KC_PSCR,
+        KC_TAB,    ES_Q,     ES_W,     ES_E,     ES_R,     ES_T,     ES_Y,     ES_U,     ES_I,       ES_O,       ES_P, ALGR(ES_GRV), ALGR(ES_PLUS), ALGR(ES_MORD),       KC_PGUP,
+        KC_CAPS,   ES_A,     ES_S,     ES_D,     ES_F,     ES_G,     ES_H,     ES_J,     ES_K,       ES_L, S(KC_COMM),      ES_ACUT,                       KC_ENT,       KC_PGDN,
+        KC_LSFT,             ES_Z,     ES_X,     ES_C,     ES_V,     ES_B,     ES_N,     ES_M,    ES_COMM,     ES_DOT,      S(ES_7),       KC_RSFT,         KC_UP,        KC_END,
+        KC_LCTL, KC_LGUI, KC_LALT,                            KC_SPC,                             KC_RALT,      MO(1),      KC_RCTL,       KC_LEFT,       KC_DOWN,        KC_RGHT
     ),
 
-    //  RGB onoff    •        •        •        •        •        •        •       •        •        •         •       •        •	                 •
-    //      •        •        •        •        •        •        •        •       •        •        •         •       •	      Reset              Play
-    //      •        •        •        •        •        •        •        •       •        •        •         •       •        •                  Next
-    //      •        •        •        •        •        •        •        •       •        •        •         •                Enter              Prev
-    //      •                 •        •        •        •        •        ñ       •        •        •         •                •        •         Stop
-    //      •        •        •                                   •                                  N Tog     FN      •        •        •         •
+//  RGB onoff    •        •        •        •        •        •        •       •        •        •         •       •        •	                 •
+//      •        •        •        •        •        •        •        •       •        •        •         •       •	      Reset              Play
+//      •        •        •        •        •        •        •        •       •        •        •         •       •        •                  Next
+//      •        •        •        •        •        •        •        •       •        •        •         •                Enter              Prev
+//      •                 •        •        •        •        •        ñ       •        •        •         •                •        •         Stop
+//      •        •        •                                   •                                  N Tog     FN      •        •        •         •
 
 
     [1] = LAYOUT(
@@ -62,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, ES_IEXL, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,         KC_MPLY,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RESET,           KC_MNXT,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,         KC_MPRV,
-        _______,          _______, _______, _______, _______, _______, ES_NTIL, _______, _______, _______, S(ES_IEXL), _______, _______, KC_MSTP,
+        _______,          _______, _______, _______, _______, _______, ES_NTIL, _______, _______, _______, S(ES_IEXL), _______, _______,      KC_MSTP,
         _______, _______, _______,                            _______,                            NK_TOGG, _______, _______, _______, _______, _______
     ),
 
