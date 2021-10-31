@@ -14,10 +14,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-//Replace Shift+6 with Alt+6
+//Aqui se define el modificador, la tecla con la que se activa la funcion y el resultado de ambos
 const key_override_t shiftComm_override = ko_make_basic(MOD_MASK_SHIFT, ES_COMM, ES_LABK);
 
-const key_override_t shift2_override = ko_make_basic(MOD_MASK_SHIFT, ES_2, ALGR(ES_2));
+const key_override_t shift2_override = ko_make_basic(MOD_MASK_SHIFT, ES_2, ALGR(ES_2));   //Aqui se especifican un Shift, un 2, y su resultado (@)
 const key_override_t shift3_override = ko_make_basic(MOD_MASK_SHIFT, ES_3, ALGR(ES_3));
 
 const key_override_t shift6_override = ko_make_basic(MOD_MASK_SHIFT, KC_6, S(ES_GRV));
@@ -42,6 +42,7 @@ const key_override_t shiftSlsh_override = ko_make_basic(MOD_MASK_SHIFT, S(ES_7),
 const key_override_t shiftScln_override = ko_make_basic(MOD_MASK_SHIFT, S(KC_COMM), S(KC_DOT));
 
 // This globally defines all key overrides to be used
+//Aqui se especifica que overrides se van a usar en el keymap
 const key_override_t **key_overrides = (const key_override_t *[]){
 
     &shiftGrv_override,

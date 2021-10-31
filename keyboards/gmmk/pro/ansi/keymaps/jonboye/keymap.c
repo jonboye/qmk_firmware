@@ -107,15 +107,32 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         case 1:
             for (uint8_t i = led_min; i < led_max; i++) {
                  RGB_MATRIX_INDICATOR_SET_COLOR(i,0,0,0);
-            }
-            RGB_MATRIX_INDICATOR_SET_COLOR(0, 0, 0, 255) //esc
-            RGB_MATRIX_INDICATOR_SET_COLOR(6, 0, 0, 255) //f1
-            RGB_MATRIX_INDICATOR_SET_COLOR(8, 0, 0, 255) //q
-            RGB_MATRIX_INDICATOR_SET_COLOR(14, 0, 0, 255) //w
-            RGB_MATRIX_INDICATOR_SET_COLOR(20, 0, 0, 255) //e
-            RGB_MATRIX_INDICATOR_SET_COLOR(15, 0, 0, 255) //s
-            RGB_MATRIX_INDICATOR_SET_COLOR(26, 0, 0, 255) //f
-            RGB_MATRIX_INDICATOR_SET_COLOR(49, 0, 0, 255) //R_Alt
+            } // codes defined in config.h
+            RGB_MATRIX_INDICATOR_SET_COLOR(LED_ESC, 115, 50, 255) //esc
+            RGB_MATRIX_INDICATOR_SET_COLOR(LED_1, 115, 50, 255) //!
+            RGB_MATRIX_INDICATOR_SET_COLOR(LED_N, 115, 50, 255) //ñ
+            RGB_MATRIX_INDICATOR_SET_COLOR(LED_SLSH, 115, 50, 255) //¿
+            RGB_MATRIX_INDICATOR_SET_COLOR(LED_BSLS, 115, 50, 255) //RESET
+            RGB_MATRIX_INDICATOR_SET_COLOR(LED_PGUP, 115, 50, 255) //Pg Up
+            RGB_MATRIX_INDICATOR_SET_COLOR(LED_PGDN, 115, 50, 255) //Pg Dn
+            RGB_MATRIX_INDICATOR_SET_COLOR(LED_HOME, 115, 50, 255) //Home
+            RGB_MATRIX_INDICATOR_SET_COLOR(LED_END, 115, 50, 255) //End
+            RGB_MATRIX_INDICATOR_SET_COLOR(LED_L1, 0, 255, 56)
+            RGB_MATRIX_INDICATOR_SET_COLOR(LED_L2, 0, 255, 56)
+            RGB_MATRIX_INDICATOR_SET_COLOR(LED_L3, 0, 255, 56)
+            RGB_MATRIX_INDICATOR_SET_COLOR(LED_L4, 0, 255, 56)
+            RGB_MATRIX_INDICATOR_SET_COLOR(LED_L5, 0, 255, 56)
+            RGB_MATRIX_INDICATOR_SET_COLOR(LED_L6, 0, 255, 56)
+            RGB_MATRIX_INDICATOR_SET_COLOR(LED_L7, 0, 255, 56)
+            RGB_MATRIX_INDICATOR_SET_COLOR(LED_L8, 0, 255, 56)
+            RGB_MATRIX_INDICATOR_SET_COLOR(LED_R1, 0, 255, 56)
+            RGB_MATRIX_INDICATOR_SET_COLOR(LED_R2, 0, 255, 56)
+            RGB_MATRIX_INDICATOR_SET_COLOR(LED_R3, 0, 255, 56)
+            RGB_MATRIX_INDICATOR_SET_COLOR(LED_R4, 0, 255, 56)
+            RGB_MATRIX_INDICATOR_SET_COLOR(LED_R5, 0, 255, 56)
+            RGB_MATRIX_INDICATOR_SET_COLOR(LED_R6, 0, 255, 56)
+            RGB_MATRIX_INDICATOR_SET_COLOR(LED_R7, 0, 255, 56)
+            RGB_MATRIX_INDICATOR_SET_COLOR(LED_R8, 0, 255, 56)
             break;
         default:
             break;
